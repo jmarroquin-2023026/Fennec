@@ -92,7 +92,7 @@ create table Factura (
     constraint PK_Factura_Cliente foreign key (clienteID)
 	references Cliente (clienteID),
 	constraint PK_Factura_Empleado foreign key (DPI) 
-	references Empleado (DPI)
+	references Empleado (DPI),
 	constraint FK_Factura_Carro foreign key(carroId) 
 		references Carro(carroId)
  
