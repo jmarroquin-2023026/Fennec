@@ -2,7 +2,6 @@ drop database if exists fennec;
 create database Fennec;
 use  fennec;
  
- 
 create table Carro (
     carroId int not null auto_increment,
     VIN int not null,
@@ -88,11 +87,14 @@ create table Factura (
     observaciones varchar(50) not null,
     clienteID int not null,
     DPI int not null,
+    carroId int not null,
     primary key FacturaID (FacturaID),
     constraint PK_Factura_Cliente foreign key (clienteID)
 	references Cliente (clienteID),
 	constraint PK_Factura_Empleado foreign key (DPI) 
 	references Empleado (DPI)
+	constraint FK_Factura_Carro foreign key(carroId) 
+		references Carro(carroId)
  
 );
 
