@@ -43,11 +43,12 @@ create table TipoEmpleado (
 
 create table Empleado (
     DPI INT PRIMARY KEY not null,
-    Nombres VARCHAR(50) not null,
-    Apellidos VARCHAR(50) not null,
-    FechaNacimiento DATE not null,
-    Correo varchar(50) not null,
-    Telefono varchar(8) not null,
+    nombres VARCHAR(50) not null,
+    apellidos VARCHAR(50) not null,
+    fechaNacimiento DATE not null,
+    correo varchar(50) not null,
+    telefono varchar(8) not null,
+    usuario varchar(20) not null,
     codigoTipoEmpleado INT not null,
     FOREIGN KEY (codigoTipoEmpleado) REFERENCES TipoEmpleado(codigoTipoEmpleado)
 );
@@ -80,8 +81,8 @@ create table DetalleCompra (
 );
 
 create table Factura (
-    FacturaID int not null,
-    FechaEmisión date not null,
+    facturaID int not null,
+    fechaEmisión date not null,
     total decimal(10,2) not null,
     estado varchar(25) not null,
     observaciones varchar(50) not null,
@@ -99,12 +100,12 @@ create table Factura (
 );
 
 create table DetalleFactura (
-    DetalleFacturaID int primary key,
-    Cantidad int,
-    PrecioUnitario decimal(10, 2),
-    SubTotal decimal(10, 2),
-    Descuento decimal(10, 2),
-    FacturaID int,
+    detalleFacturaID int primary key,
+    cantidad int,
+    precioUnitario decimal(10, 2),
+    subTotal decimal(10, 2),
+    descuento decimal(10, 2),
+    facturaID int,
     foreign key (FacturaID) references Factura(FacturaID)
 );
  
