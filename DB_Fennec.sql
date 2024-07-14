@@ -2,10 +2,6 @@ drop database if exists fennec;
 create database Fennec;
 use  fennec;
  
-<<<<<<< HEAD
-=======
- 
->>>>>>> gpinula-2020433
 create table Carro (
     carroId int not null auto_increment,
     VIN int not null,
@@ -46,7 +42,6 @@ create table TipoEmpleado (
 );
 
 create table Empleado (
-<<<<<<< HEAD
     DPI varchar(13) PRIMARY KEY not null,
     nombres VARCHAR(50) not null,
     apellidos VARCHAR(50) not null,
@@ -54,14 +49,6 @@ create table Empleado (
     correo varchar(50) not null,
     telefono varchar(8) not null,
     usuario varchar(20) not null,
-=======
-    DPI INT PRIMARY KEY not null,
-    Nombres VARCHAR(50) not null,
-    Apellidos VARCHAR(50) not null,
-    FechaNacimiento DATE not null,
-    Correo varchar(50) not null,
-    Telefono varchar(8) not null,
->>>>>>> gpinula-2020433
     codigoTipoEmpleado INT not null,
     FOREIGN KEY (codigoTipoEmpleado) REFERENCES TipoEmpleado(codigoTipoEmpleado)
 );
@@ -73,7 +60,6 @@ create table Compra (
     totalDocumento decimal(10,2) default 0,
     estado varchar (25) not null,
     primary key PK_codigoCompra (codigoCompra)
-<<<<<<< HEAD
 );
 
 create table DetalleCompra (
@@ -135,6 +121,11 @@ Create table DetalleCarro(
     constraint FK_DetalleCarro_Carro foreign key (carroId)
 		references Carro (carroId)
 );
-=======
-);
->>>>>>> gpinula-2020433
+
+INSERT INTO TipoEmpleado (descripcion, salarioBase, bonificacion, turno)
+VALUES ('Ejecutivo', 5000.00, 1000.00, 'Matutino');
+
+INSERT INTO Empleado (DPI, Nombres, Apellidos, FechaNacimiento, Correo, Telefono, codigoTipoEmpleado)
+VALUES ('1234567890123', 'Juan', 'Pérez', '1990-05-15', 'juan.perez@example.com', '12345678', 1);
+
+
