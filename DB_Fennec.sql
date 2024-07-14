@@ -87,7 +87,7 @@ create table Factura (
     estado varchar(25) not null,
     observaciones varchar(50) not null,
     clienteID int not null,
-    DPI varchar(13) int not null,
+    DPI varchar(13) not null,
     carroId int not null,
     primary key FacturaID (FacturaID),
     constraint PK_Factura_Cliente foreign key (clienteID)
