@@ -42,7 +42,7 @@ create table TipoEmpleado (
 );
 
 create table Empleado (
-    DPI INT PRIMARY KEY not null,
+    DPI varchar(13) PRIMARY KEY not null,
     nombres VARCHAR(50) not null,
     apellidos VARCHAR(50) not null,
     fechaNacimiento DATE not null,
@@ -87,7 +87,7 @@ create table Factura (
     estado varchar(25) not null,
     observaciones varchar(50) not null,
     clienteID int not null,
-    DPI int not null,
+    DPI varchar(13) int not null,
     carroId int not null,
     primary key FacturaID (FacturaID),
     constraint PK_Factura_Cliente foreign key (clienteID)
