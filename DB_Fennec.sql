@@ -2,7 +2,6 @@ drop database if exists fennec;
 create database Fennec;
 use  fennec;
  
- 
 create table Carro (
     carroId int not null auto_increment,
     VIN int not null,
@@ -43,12 +42,93 @@ create table TipoEmpleado (
 );
 
 create table Empleado (
-    DPI INT PRIMARY KEY not null,
-    Nombres VARCHAR(50) not null,
-    Apellidos VARCHAR(50) not null,
-    FechaNacimiento DATE not null,
-    Correo varchar(50) not null,
-    Telefono varchar(8) not null,
+	codigoEmpleado int not null auto_increment,
+    DPI varchar(13) not null,
+    nombres varchar(50) not null,
+    apellidos varchar(50),
+    fechaNacimiento DATE,
+    correo varchar(50) not null,
+    telefono varchar(8) not null,
+    usuario varchar(20) not null,
+    imagen longblob,
     codigoTipoEmpleado INT not null,
+    primary key PK_codigoEmpleado (codigoEmpleado),
     FOREIGN KEY (codigoTipoEmpleado) REFERENCES TipoEmpleado(codigoTipoEmpleado)
 );
+
+create table Compra (
+    codigoCompra int not null auto_increment,
+    fecha date not null,
+    descripcion varchar(50) not null,
+    totalDocumento decimal(10,2) default 0,
+    estado varchar (25) not null,
+    primary key PK_codigoCompra (codigoCompra)
+);
+
+create table DetalleCompra (
+	codigoDetalleCompra int not null auto_increment,
+    costoUnitario decimal(10,2) default 0 not null,
+    cantidad int not null,
+    observaciones varchar(150) not null,
+    tipoDePago varchar(50) not null,
+    carroId int not null,
+    codigoCompra int not null,
+    codigoProveedor int not null,
+    Primary key PK_codigoDetalleCompra (codigoDetalleCompra),
+    constraint FK_DetalleCompra_Carro foreign key (carroId) 
+		references Carro (carroId),
+	constraint FK_DetalleCompra_Compra foreign key (codigoCompra) 
+		references Compra (codigoCompra),
+	constraint FK_DetalleCompra_Proveedor foreign key (codigoProveedor) 
+		references Proveedor (codigoProveedor)
+);
+
+create table Factura (
+    facturaID int not null,
+    fechaEmisión date not null,
+    total decimal(10,2) not null,
+    estado varchar(25) not null,
+    observaciones varchar(50) not null,
+    clienteID int not null,
+    codigoEmpleado int not null,
+    carroId int not null,
+    primary key FacturaID (FacturaID),
+    constraint PK_Factura_Cliente foreign key (clienteID)
+	references Cliente (clienteID),
+	constraint PK_Factura_Empleado foreign key (codigoEmpleado) 
+	references Empleado (codigoEmpleado),
+	constraint FK_Factura_Carro foreign key(carroId) 
+		references Carro(carroId)
+ 
+);
+
+create table DetalleFactura (
+    detalleFacturaID int primary key,
+    cantidad int,
+    precioUnitario decimal(10, 2),
+    subTotal decimal(10, 2),
+    descuento decimal(10, 2),
+    facturaID int,
+    foreign key (FacturaID) references Factura(FacturaID)
+);
+ 
+Create table DetalleCarro(
+	codigoDetalleCarro int not null,
+    tipoCarro varchar(25) not null,
+    puertas int not null,
+    transimsion varchar(25),
+    tipoLlantas varchar(50),
+    color varchar(50),
+    carroId int not null,
+    Primary key PK_codigoDetalleCarro (codigoDetalleCarro),
+    constraint FK_DetalleCarro_Carro foreign key (carroId)
+		references Carro (carroId)
+);
+
+INSERT INTO TipoEmpleado (descripcion, salarioBase, bonificacion, turno)
+VALUES ('Ejecutivo', 5000.00, 1000.00, 'Matutino');
+
+INSERT INTO Empleado (DPI, Nombres, Apellidos, Correo, Telefono, usuario,codigoTipoEmpleado)
+VALUES ('1234567890123', 'Juan', 'Pérez', 'juan.perez@example.com', '12345678','user', 1);
+
+
