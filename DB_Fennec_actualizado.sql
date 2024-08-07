@@ -1,6 +1,6 @@
 drop database if exists fennec;
 create database Fennec;
-use  Fennec;
+use  fennec;
  
 create table Carro (
     carroId int not null auto_increment,
