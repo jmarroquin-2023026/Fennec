@@ -7,18 +7,19 @@ create table Carro (
     VIN int not null,
     marca VARCHAR(50) not null,
     modelo VARCHAR(50) not null,
-    año int not null,
+    anio int not null,
     precio DECIMAL(10, 2) not null,
 	primary key PK_carroId (carroId)
 );
 
 create table Cliente (
-    clienteID INT PRIMARY KEY not null,
+    clienteID int not null auto_increment,
     nombre VARCHAR(50) not null,
     apellido VARCHAR(50)not null,
     direccion VARCHAR(100) not null,
     telefono VARCHAR(20)not null,
-    correo varchar(50) not null
+    correo varchar(50) not null,
+    primary key PK_clienteID (clienteID)
 );
 
 create table Proveedor(
@@ -128,17 +129,17 @@ Create table DetalleCarro(
 INSERT INTO TipoEmpleado (descripcion, salarioBase, bonificacion, turno)
 VALUES ('Ejecutivo', 5000.00, 1000.00, 'Matutino');
 
-INSERT INTO Empleado (DPI, Nombres, Apellidos, Correo, Telefono, usuario, codigoTipoEmpleado)
-VALUES ('1234567890123', 'Juan', 'Pérez', 'juan.perez@example.com', '12345678','user', 1);
+INSERT INTO Empleado (DPI, Nombres, Apellidos, fechaNacimiento, Correo, Telefono, usuario, codigoTipoEmpleado)
+VALUES ('1234567890123', 'Juan', 'Perez Martinez','2024-08-04', 'juanperez@gmail.com', '12345678','user', 1);
 
-INSERT INTO Carro (VIN, marca, modelo, año, precio) VALUES (123456789, 'Toyota', 'Corolla', 2020, 20000.00);
+INSERT INTO Carro (VIN, marca, modelo, anio, precio) VALUES (123456789, 'Toyota', 'Corolla', 2020, 20000.00);
 INSERT INTO DetalleCarro (codigoDetalleCarro, tipoCarro, puertas, transmision, tipoLlantas, color, carroId) 
 VALUES (1, 'Sedán', 4, 'Automática', 'Radiales', 'Blanco', (SELECT carroId FROM Carro WHERE VIN = 123456789));
 
 
-INSERT INTO Carro (VIN, marca, modelo, año, precio) VALUES (123456789, 'Toyota', 'Corolla', 2020, 20000.00);
+INSERT INTO Carro (VIN, marca, modelo, anio, precio) VALUES (123456789, 'Toyota', 'Corolla', 2020, 20000.00);
 
-INSERT INTO Cliente (clienteID, nombre, apellido, direccion , telefono, correo) VALUES (1,'Juan', 'Pérez', 'Calle Falsa 123', '5551234', 'juan.perez@example.com');
+INSERT INTO Cliente (nombre, apellido, direccion , telefono, correo) VALUES ('Juan', 'Pérez', 'Calle Falsa 123', '5551234', 'juan.perez@example.com');
 
 INSERT INTO Proveedor (nombresProveedor, apellidosProveedor, direccionProveedor, telefonoProveedor, correoProveedor, observacionesProveedor) 
 VALUES ('Proveedor', 'Ejemplo', 'Avenida Principal 456', '12345678', 'proveedor@example.com', 'Observaciones');
